@@ -1,1 +1,1 @@
-# kreatywne_projekt
+# Projekt z przedmiotu Programowanie Kreatywne
