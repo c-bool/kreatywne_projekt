@@ -14,7 +14,7 @@ def encode(image_filename, msg_to_encode):
     rows_for_chars = np.linspace(0, picture_px.shape[0], len(msg_to_encode), endpoint=False, dtype=int)
     for i, char in enumerate(msg_to_encode):
         picture_px[rows_for_chars[i], ord(char)] = [255, 255, 255]
-    cv2.imwrite(image_filename, picture_px, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+    cv2.imwrite(image_filename, picture_px, [int(cv2.IMWRITE_PNG_COMPRESSION), 4])
 
 
 def decode(image_filename):
