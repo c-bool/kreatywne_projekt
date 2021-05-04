@@ -1,12 +1,26 @@
 import numpy as np
+import logging
 import cv2
 
 
 def remove_zero_pixels(image_filename):
-    picture_px = cv2.imread(image_filename, cv2.IMREAD_UNCHANGED)
-    picture_px[np.where((picture_px == [255, 255, 255]).all(axis=2))] = [254, 254, 254]
+    if image_filename.lower().endswith('.png'):
+        picture_px = cv2.imread(image_filename, cv2.IMREAD_UNCHANGED)
 
-    return picture_px
+        try:
+            _ = picture_px.shape  # will throw exception for corrupted/non-image files
+        except Exception as e:
+            print(e)
+            logging.error("Image is not available or corrupted.")
+            exit(1)
+
+        picture_px[np.where((picture_px == [255, 255, 255]).all(axis=2))] = [254, 254, 254]
+
+        return picture_px
+
+    else:
+        logging.error("Image should be in png format.")
+        exit(1)
 
 
 def encode(image_filename, msg_to_encode):
@@ -24,5 +38,6 @@ def decode(image_filename):
     return "".join([chr(x) for x in encoded_chars_found])
 
 
+logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
 encode("test.png", "Hello World!!")
 print(decode("test.png"))
