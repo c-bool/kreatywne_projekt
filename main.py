@@ -12,6 +12,8 @@ import face_recognize as fr
 def load_key():
     """
     Loads the previously generated secret key needed to run a program.
+
+    :return: Key from secret file as bytes
     """
     if not os.path.isfile("secret.key"):
         logging.error("Missing file with secret key.")
@@ -35,6 +37,8 @@ def decrypt_access_phrase():
     if decrypted_message.decode() != 'klucz_dostepu':
         logging.error("File secret.key found but key is invalid.")
         exit(1)
+
+    logging.info("Key from secret.key is correct!")
 
 
 def remove_white_pixels(image_filename):
@@ -94,7 +98,6 @@ def decode(image_filename, shift):
 
 if __name__ == "__main__":
     logging.basicConfig(format="[%(levelname)s] %(message)s", level=logging.INFO)
-    logging.info("Waiting for camera video capture to run...")
 
     fr.recognize_face()
     decrypt_access_phrase()
