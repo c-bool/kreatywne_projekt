@@ -15,16 +15,16 @@ def recognize_face():
     video_capture = cv2.VideoCapture(0)
 
     # Load a sample picture and learn how to recognize it.
-    obama_image = face_recognition.load_image_file("obama.jpg")
-    obama_image = cv2.cvtColor(obama_image, cv2.COLOR_BGR2RGB)
-    obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+    known_image = face_recognition.load_image_file("known_face.jpg")
+    known_image = cv2.cvtColor(known_image, cv2.COLOR_BGR2RGB)
+    known_face_encoding = face_recognition.face_encodings(known_image)[0]
 
     # Create arrays of known face encodings and their names
     known_face_encodings = [
-        obama_face_encoding
+        known_face_encoding
     ]
     known_face_names = [
-        "Barack Obama"
+        "known_face_1"
     ]
 
     # Initialize some variables
