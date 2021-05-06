@@ -50,7 +50,7 @@ def remove_white_pixels(image_filename):
     :return: Image's pixels as numpy array
     """
     if not image_filename.lower().endswith('.png'):
-        logging.error("Image should be in png format.")
+        logging.warning("Image should be in png format.")
         exit(1)
 
     picture_px = cv2.imread(image_filename, cv2.IMREAD_UNCHANGED)
