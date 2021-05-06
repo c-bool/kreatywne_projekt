@@ -6,6 +6,7 @@ import math
 from cryptography.fernet import Fernet
 import numpy as np
 import cv2
+from tqdm import tqdm
 # Import project files
 import face_recognize as fr
 
@@ -102,7 +103,7 @@ def encode(image_filename, shift, msg_to_encode):
         for i in range(0, 3 - (len(msg_to_encode) % 3) ):
             msg_tab.append(" ")
 
-    for px in px_for_chars:
+    for px in tqdm(px_for_chars):
         #print(msg_tab)
         picture_px[math.floor(px / w), px % w] = [ord(msg_tab[0]) + shift, ord(msg_tab[1]) + shift, ord(msg_tab[2]) + shift]
         msg_tab.pop(2)
@@ -132,7 +133,7 @@ def decode(image_filename, shift):
     px_with_chars = np.linspace(1, px_res, math.ceil(msg_len/3), endpoint=False, dtype=int)
 
     msg_tab = []
-    for px in px_with_chars:
+    for px in tqdm(px_with_chars):
         char = picture_px[math.floor(px / w), px % w]
         msg_tab.append(char[0] - shift)
         msg_tab.append(char[1] - shift)
