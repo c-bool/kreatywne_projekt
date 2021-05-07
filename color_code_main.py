@@ -127,13 +127,14 @@ if __name__ == "__main__":
     # fr.recognize_face()
     decrypt_access_phrase()
     while True:
-        if easygui.indexbox(msg='What do you want to do?', title='Color Code', choices=('Encode', 'Decode'), cancel_choice='No'):
-            filename = easygui.fileopenbox(msg="Give image to decode", title=None, default="encoded_ori_photo.png", filetypes="*.png", multiple=False)
-            easygui.msgbox(msg=decode(filename, 0), title='Color Code', ok_button='Exit', root=None)
-        else:
+        choice = easygui.indexbox(msg='What do you want to do?', title='Color Code', choices=('Encode', 'Decode', "Exit"), image="icon.jpeg",cancel_choice='No')
+        if choice == 0:
             msg = easygui.enterbox(msg='Give message to encode', title='Color Code', default='Hello World!', strip=False, root=None)
             filename = easygui.fileopenbox(msg="Give image to encode", title=None, default="ori_photo.png", filetypes="*.png", multiple=False)
             save_filename = easygui.filesavebox(msg="Save encoded image as..", title=None, default='encoded_ori_photo.png', filetypes="*.png")
             encode(filename, 0, msg, save_filename)
-        if easygui.ynbox(msg='Do you want to exit?', title='Color Code', choices=('Yes', 'No')):
+        elif choice == 1:
+            filename = easygui.fileopenbox(msg="Give image to decode", title=None, default="encoded_ori_photo.png", filetypes="*.png", multiple=False)
+            easygui.msgbox(msg=f"Message encoded in image is:\n\n{decode(filename, 0)}", title='Color Code', ok_button='Continue', root=None)
+        else:
             exit(1)
