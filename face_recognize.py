@@ -29,7 +29,6 @@ def recognize_face():
 
     # Initialize some variables
     face_locations = []
-    face_encodings = []
     face_names = []
     process_this_frame = True
     recognition_frames = 0
